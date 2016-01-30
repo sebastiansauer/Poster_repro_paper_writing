@@ -1,0 +1,206 @@
+% Latex RWTH Poster template (based on a0poster document class)
+% by Pablo Reble, Georg Wassen and Kirstin Schubert
+% RWTH Aachen University
+%
+%This file may be distributed and/or modified
+%
+%1. under the LaTeX Project Public License and/or
+%2. under the GNU Public License. 
+%
+% [21.01.2013]	 Version 0.1: First version of the template
+
+\documentclass[a0,portrait,final]{a0poster}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily, language={C}}     % Standards for Listings
+
+\usepackage{amsmath,amsthm, amssymb, latexsym,tikz}
+\usepackage{multicol}
+\usetikzlibrary{arrows,shapes}
+\usepackage{pgfplots}
+\pgfplotsset{
+  every axis/.append style={thick}
+}
+
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+% \myfig - replacement for \figure
+% necessary, since in multicol-environment 
+% \figure won't work
+
+\newcommand{\myfig}[3][0]{
+  \begin{center}
+    \vspace{1.5cm}
+    \includegraphics[width=#3\hsize, angle=#1]{#2}
+    \nobreak\medskip
+  \end{center}}
+
+% \mycaption - replacement for \caption
+% necessary, since in multicol-environment \figure and
+% therefore \caption won't work
+
+%  \setcounter{figure}{1}
+%  \newcommand{\mycaption}[1]{
+%    \vspace{0.5cm}
+%    \begin{quote}
+%      %{{\sc Figure} \arabic{figure}: #1}
+%      {#1}
+%    \end{quote}
+%    \vspace{1cm}
+%    \stepcounter{figure}
+%  }
+%	
+
+%\newenvironment{pcolumn}[1]{
+%\begin{minipage}{#1}
+  %\begin{center}
+%  }{
+  %\end{center}
+%  \end{minipage}
+%  }
+
+\usepackage{lfbsposter}
+
+\begin{document}
+%
+  \title{Making research reproducible using literate programming}
+  \author{Sebastian Sauer, Sandra S\"ulzenbr\"uck, Yvonne Ferreira, and Christoph Kurz}
+  \institute{FOM University of Applied Sciences, Helmholtz Zentrum M\"unchen}
+  \sffamily
+
+    \begin{poster}
+    \makeheader
+    \makefooter
+    \vspace{12cm}
+    
+    \begin{multicols}{2}
+    \hspace{2cm}
+    \begin{minipage}[r]{\pcolwidth}
+
+    %%
+    %% top left box
+    %%
+    \begin{posterbox}{25cm}{Reproducibility: What and why?}
+    There is an increasing concern about the reliability of research results \cite{Peng2015}.
+    Precisely, it has been found that many published results cannot be replicated \cite{OpenScienceCollaboration2015}.
+    In parts, this can be due to the fact that it is often hardly possible for independent researchers to
+    confirm the results of a research paper. Thus, making research more reproducible seems a pressing need  \cite{Peng2015}.
+    Here, we present some ``recipe'' for making (your) research paper more reproducible using literate programming.
+    Literate programming refers to weaving programming code (ie., statistical calculations) with the paper text.
+    \end{posterbox}
+    
+    \vspace{\mydist}
+    
+    %%
+    %% center left box
+    %%
+    
+     \begin{posterbox}{25cm}{Figure and Text}
+      \begin{minipage}[b]{0.2\boxwidth}
+         \tikzstyle{format} = [rectangle, draw, fill=blue!20, text centered, rounded corners,  text width=10em]
+      \tikzstyle{medium} = [ellipse, draw, thin, fill=green!20, minimum height=2.5em]
+      \tikzstyle{line} = [draw, -latex']
+
+      \begin{tikzpicture}[node distance=8cm, auto]
+          % We need to set a bounding box first. Otherwise the diagram
+          % will change position for each frame.
+          %\path[use as bounding box] (-5,0) rectangle (10,10);
+        
+        \node [format] (idea) {vague idea\\but cool};
+        \node [format, below of = idea] (notes) {scribbled\\notes};
+        \node [format, below of = notes] (manuscript) {unformated\\manuscript};
+        \node [format, below of = manuscript ] (paper) {typesetted\\paper};
+        
+        \path [line] (idea) -- node {think} (notes) ;
+        \path [line] (notes) --  node {scribble} (manuscript);
+        \path [line] (manuscript) -- node {format}(paper);       
+      \end{tikzpicture}
+     \end{minipage}		
+    \hfill
+      \begin{minipage}[b]{0.6\boxwidth}
+   
+   \begin{itemize}
+\item The diagram depicts the main cognitive tasks and their outputs. 
+\item As the brain is not capable for multitasking \cite{Clapp2011}, better deal with these tasks sequentially.
+\item Bringing the first (still vague, but cool) idea to paper should be taken literally. Taking pencil notes, scribbling around, and thinking by using visual aides (e.g., path diagrams) is helpful, as the brain needs to spends least resources on technical means such as dealing with a software.
+\item Similarly, when typing the (now somewhat ripened) ideas into a computer, no efforts in formatting (type-setting, beautiful layouts, nice colors...) whatsoever should be made.
+\item Thus, researchers are in need of text programs that take away any burden of formatting from the researcher in this phase. The aim is that the researcher has all cognitive resources for the content of his or her writing -- not the form.
+\end{itemize}
+       
+      \end{minipage}   
+      \hspace{1cm}
+    \end{posterbox}
+   
+      
+      \vspace{\mydist}
+      %%
+      %% bottom left box
+      %%
+      \begin{posterbox}{28cm}{Pictures}
+        Rotate a mascot 90°
+        \myfig[90]{NewTux}{.2}
+        and 45°
+        \myfig[45]{NewTux}{.2}
+      \end{posterbox}
+    \end{minipage}
+
+    %% end left column; start next one
+
+    \begin{minipage}{\pcolwidth}
+    %%
+    %% top right box
+    %%
+    \begin{posterbox}{25cm}{Figure and Text}
+      \begin{minipage}{0.4\boxwidth}
+        Inviti itaque ad tempora male exacta animum revocant nec audent ea retemptare, quorum vitia,
+        etiam quae aliquo praesentis voluptatis lenocinio surripiebantur, retractando patescunt. Nemo,
+        nisi cui omnia acta sunt sub censura sua, quae numquam fallitur, libenter se in praeteritum
+        retorquet.			
+      \end{minipage}		
+      \hfill
+      \begin{minipage}{0.4\boxwidth}
+        \myfig[0]{logo/logo1}{1}
+      \end{minipage}   
+      \hspace{1cm}
+    \end{posterbox}
+    
+    %%
+    %% middle right box
+    %%
+    \vspace{\mydist}
+    \begin{posterbox}{27cm}{Code}
+      Some Text with inline listing: \lstinline|#include <stdio.h>|
+      
+      \begin{lstlisting}[language=C,gobble=12]
+        #include <stdio.h>
+        #include "main.h"
+
+        int main (void) {
+          return 0;
+        }
+      \end{lstlisting}
+      More text.
+    \end{posterbox}
+      
+    %%
+    %% bottom right box
+    %%
+    \vspace{\mydist}
+    \begin{posterbox}{28cm}{Fonts}
+      Fonts can be {\Huge huge} and \textbf{fat} to increase readability.
+        
+      Highlighting foreign words by using colors:
+      \textcolor{blue}{Blau}
+    \end{posterbox}
+
+    \end{minipage}
+    \end{multicols}
+  \end{poster}
+
+\end{document}
+

@@ -1,0 +1,6 @@
+latex Poster_DAGStat_Repro_Writing_v01.tex
+bibtex Poster_DAGStat_Repro_Writing_v01
+latex Poster_DAGStat_Repro_Writing_v01.tex
+latex Poster_DAGStat_Repro_Writing_v01.tex
+dvips -Ppdf Poster_DAGStat_Repro_Writing_v01.dvi -o Poster_DAGStat_Repro_Writing_v01.ps
+ps2pdf Poster_DAGStat_Repro_Writing_v01.ps Poster_DAGStat_Repro_Writing_v01.pdf
