@@ -8,6 +8,8 @@
   \usepackage{amsmath,amsthm, amssymb, latexsym, tikz}
 \usepackage{graphicx}
 
+\usepackage[sort]{natbib}
+
 \usepackage{tabulary}
 
 \usepackage[export]{adjustbox}
@@ -44,7 +46,7 @@
     In parts, this can be due to the fact that it is often hardly possible for independent researchers to
     confirm the results of a research paper. Thus, making research more reproducible seems a pressing need  \cite{Peng2015}.
     Here, we present some ``recipe'' for making (your) research paper more reproducible using literate programming.
-    Literate programming refers to weaving programming code (ie., statistical calculations) with the paper text.        
+    Literate programming refers to weaving programming code (ie., statistical calculations) with the paper text, ie., the normal text of a paper.    
     
     \end{block}
       
@@ -104,8 +106,7 @@
       \end{tikzpicture}
      \end{minipage}	
      \\
-    The \emph{diagram} shows the workflow \emph{in theory}. The \emph{right} diagram exemplifies useful tools for each step.
-     
+    The \emph{diagram} shows the workflow \emph{in theory}. The \emph{right} diagram exemplifies useful tools for each step.      
     \end{block}
 
 
@@ -130,7 +131,7 @@
 
    
      \begin{block}{Which tools make the researcher happy?}
-    
+    \begin{center}
 \begin{tabular}{rllll}
   \hline
  & Word & Latex & Markdown & WebApps \\ 
@@ -146,9 +147,10 @@ simple &  $\bullet\bullet\bullet$ & $\bullet$ & $\bullet\bullet$ & $\bullet\bull
    $\Sigma$ & 13 & 17 & 18 & 16\\
    \hline
 \end{tabular}
+\end{center}
 \bigskip
 
-This table compares some (subjective) criteria of what a researcher needs for writing a paper in a reproducible and efficient way. Note: \emph{Word} refers not only to MS Word, but to similar WYSIWYG text processors as well. \emph{WebApps} refer to scholarly writing tools such as \emph{Authorea}. \emph{Markdown} refers to the \emph{pandoc} dialect and extensions of markdown.
+This table compares some (subjective) criteria of what a researcher needs for writing a paper in a reproducible and efficient way. Note: \emph{Word} refers not only to MS Word, but to similar WYSIWYG text processors as well. \emph{WebApps} refer to scholarly writing tools such as \emph{Authorea}. \emph{Markdown} refers to the \emph{Pandoc} dialect (and extensions) of Markdown.
    
         \end{block}
  
@@ -160,32 +162,54 @@ This table compares some (subjective) criteria of what a researcher needs for wr
       \begin{column}{.48\linewidth} 
           
       
+         \begin{block}{Stating the problem}
+         \begin{minipage}[t]{0.40\textwidth}
+         \begin{figure}[ht]
+             \centering
+             \includegraphics[valign=T,scale=.4, angle=270]{logo/rcode_example}
+             \caption{ 1000 lines of code in your paper} 
+          \end{figure}
+          \end{minipage}
+          \begin{minipage}[t]{0.55\textwidth}
+          \begin{figure}[ht]
+             \centering
+             \includegraphics[valign=T,scale=.5]{logo/paper_icon}
+                 \caption{ 20 numbers as results of computations somewhere in your paper} 
+           \end{figure}
+          \end{minipage}   
+          \newline
+          Assume there is not direct link of your (statistical) computations to the respective number in the text.
+          It will be hard to understand for someone unfamiliar with your work which calculations have yielded some figure in your paper. So confirming that the calculations are valid will be hard.  
+         \end{block}     
+
+      
+      
   \begin{block}{Software tools for reproducible writing}
     
 \begin{tabulary}{1.0\textwidth}{CLL}
   \hline
  Logo  & Name & Description  \\ 
  \hline
-\includegraphics[valign=T,scale=.3]{logo/R_logo} & \textbf{R }& Environment for statistical calculations and programming\\
- \includegraphics[valign=T,scale=.1]{logo/RStudio_logo} &  \textbf{R-Studio} & IDE for R including features for version control (eg git), and literal programming (Knitr, Pandoc, Markdown)\\
- \includegraphics[valign=T, scale=.5]{logo/knitr_logo} &  \textbf{Knitr} & R-package to ``knit'' (or ``weave'') R-code into plain text as a way of functional programming\\
+\includegraphics[valign=T,scale=.2]{logo/R_logo} & \textbf{R }& Environment for statistical calculations and programming \cite{RCoreTeam2015}\\
+ \includegraphics[valign=T,scale=.08]{logo/RStudio_logo} &  \textbf{R-Studio} & IDE for R including features for version control (eg git), and literal programming (Knitr, Pandoc, Markdown)\\
+ \includegraphics[valign=T, scale=.5]{logo/knitr_logo} &  \textbf{Knitr} & R-package to ``knit'' (or ``weave'') R-code into plain text as a way of functional programming \cite{Xie2016}\\
  \includegraphics[valign=T, scale=.3]{logo/git_logo} & \textbf{Git} & version control tool, handles multiples collaborators, tracks changes in text files\\
- \texttt{PANDOC} &  \textbf{Pandoc} & ``swiss army knife'' for converting markup languages, eg. Markdown $\rightarrow$ PDF\\
- %\includegraphics[valign=T, scale=.3]{logo/markdown_logo} & \textbf{Markdown} & Similar aims as Latex, but you learn it in 5 minutes. See: \textbf{boldface} in Markdown\\  
- \hline
+ \texttt{PANDOC} &  \textbf{Pandoc} & ``swiss army knife'' for converting markup text, eg. Markdown $\rightarrow$ PDF\\
+ \includegraphics[valign=T, scale=.5]{logo/markdown_logo} & \textbf{Markdown} & Similar aims as Latex, but you learn it in 5 minutes.\\  
+ %\hline
   \end{tabulary}
   
    \end{block}
 
 
 
-        \begin{block}{code bits'n'bites}
+        \begin{block}{Main commands to turn R+Markup-Text into polished PDF-paper}
         
-          The main commands are:
+       
           \begin{itemize}
              \item Weave code in text using \textbf{knitr}, giving a R-Markdown (.rmd) (or R-Latex, .rnw) file: ``Mean reaction time was \texttt{`round(mean(rt), 2)'} ms''. $\rightarrow$ ``Mean reaction time was 433.30 ms''.
              \item Knit R-Text-Mixup to pure text plus markup using R-package \textbf{knitr:}
-             \newline \texttt{knitr(source.rmd} 
+             \newline \texttt{knitr(source.rmd)} 
              \item Convert Markdown to Latex-PDF with \textbf{Pandoc:} 
              \newline \texttt{pandoc source.md --output paper.pdf ...} 
       \end{itemize}
@@ -196,12 +220,22 @@ This table compares some (subjective) criteria of what a researcher needs for wr
         
         \begin{block}{Conclusion}
             \begin{itemize}
+            \item Note that complex cognitive steps such as creative thinking, drafting a paper outline, writing an argument, debugging code etc. are best dealt with sequentially. Our brain is not so fit for multitasking \cite{Clapp2011}.
              \item A somewhat ideal combinations of tools for efficiently and reproducibly writing papers is: R+RStudio+knitr+markdown+pandoc+git.    
              \item Writing in \texttt{Markdown} is nice, because little markup clutters the view. Pandoc them compiles the markdown to latex, applying some tex-template of your flavor.
-             \item However,  \textt{Pandoc} currently does not provide (easily) provides the flexibility to adjust every detail one may think of, in addition changing the default templates is not yet stable (enough for me). 
+             \item However,  \texttt{Pandoc} currently does not provide (easily) provides the flexibility to adjust every detail one may think of, in addition changing the default templates is not yet stable (enough for me). 
              \item Looking forward to the time where you can write in R-Markdown and compile it to Tex easily with all kinds of style-templates.
+                \end{itemize}
         \end{block}     
 
+
+
+     \begin{block}{References}
+     \begin{tiny}
+     \bibliographystyle{plain}
+     \bibliography{bibliography}
+     \end{tiny}
+        \end{block}     
    
    
          \end{column}
