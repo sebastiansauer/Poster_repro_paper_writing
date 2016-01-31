@@ -1,0 +1,196 @@
+\documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
+\mode<presentation>
+  {
+  %  \usetheme{Berlin}
+  \usetheme{Dreuw}
+  }
+  \usepackage{times}
+  \usepackage{amsmath,amsthm, amssymb, latexsym, tikz}
+
+\usepackage{multicol}
+\usetikzlibrary{arrows,shapes}
+  
+  \boldmath
+  \usepackage[english]{babel}
+  \usepackage[latin1]{inputenc}
+  \usepackage[orientation=portrait,size=a0,scale=1.4,debug]{beamerposter}
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+  \graphicspath{{figures/}}
+  \title{Making research reproducible \\using literate programming}
+  \author{Sebastian Sauer, Sandra S\"ulzenbr\"uck, Yvonne Ferreira, and Christoph Kurz}
+  \institute{FOM University of Applied Sciences, Helmholtz Zentrum M\"unchen}
+
+  \date{March 2014}
+
+
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+  \begin{document}
+  \begin{frame}{} 
+    
+      \begin{columns}[t]
+      
+      \begin{column}{.48\linewidth}
+      
+        \begin{block}{Reproducibility: What and why?}
+      There is an increasing concern about the reliability of research results \cite{Peng2015}.
+    Precisely, it has been found that many published results cannot be replicated \cite{OpenScienceCollaboration2015}.
+    In parts, this can be due to the fact that it is often hardly possible for independent researchers to
+    confirm the results of a research paper. Thus, making research more reproducible seems a pressing need  \cite{Peng2015}.
+    Here, we present some ``recipe'' for making (your) research paper more reproducible using literate programming.
+    Literate programming refers to weaving programming code (ie., statistical calculations) with the paper text.        
+    
+    \end{block}
+      
+      
+      
+            \begin{block}{Workflow for reproducible paper writing}
+         
+      \begin{minipage}[t]{0.45\textwidth}
+      %Workflow, in general
+      %\vspace{2cm}
+      \tikzstyle{format} = [rectangle, draw, text centered, rounded corners]
+      \tikzstyle{medium} = [rectangle, draw, thin]
+      \tikzstyle{line} = [draw, -latex']
+      \begin{tikzpicture}[node distance=7cm, auto]
+          % We need to set a bounding box first. Otherwise the diagram
+          % will change position for each frame.
+          %\path[use as bounding box] (-5,0) rectangle (10,10);
+        
+        \node [format] (idea) {idea};
+        \node [format, below of = idea] (notes) {notes};
+        \node [format, below of = notes, align = center] (manuscript) {unformated\\manuscript};
+        \node [format, below of = manuscript,  align = center] (paper) {typesetted\\paper};
+        \node [medium, left of = manuscript, xshift = -3cm] (R)  {calculations};
+        \node [medium, above left  of = manuscript, yshift = 1cm, align = center] (vc) {version\\control};
+        \node [medium, below left of = manuscript,  xshift = -3cm, yshift = -3cm]  (collab) {collaborators};
+        \path [line] (idea) -- node [align=center] {\emph{think,}\\\emph{scribble}} (notes) ;
+        \path [line] (notes) --  node [align=center] {\emph{hack}\\\emph{text}} (manuscript);
+        \path [line] (manuscript) -- node {\emph{format}}(paper);     
+        \path [line, below=7cm] (R) --  node [align=center] {\emph{calc}\\\emph{data}}(manuscript);  
+        \path [line, left] (vc) -- node {\emph{track changes}} (manuscript);
+        \path [line] (collab) -- node [align=center, near start] {\emph{give}\\\emph{input}} (manuscript);
+      \end{tikzpicture}
+     \end{minipage}	
+     %
+     % now with software tools
+     \begin{minipage}[t]{0.50\textwidth}
+     \begin{tikzpicture}[node distance=7cm, auto]
+          % We need to set a bounding box first. Otherwise the diagram
+          % will change position for each frame.
+          %\path[use as bounding box] (-5,0) rectangle (10,10);
+          \tikzstyle{format} = [rectangle, draw, text centered, rounded corners]
+      \tikzstyle{medium} = [rectangle, draw, thin]
+      \tikzstyle{line} = [draw, -latex']
+        \node [format] (idea) {idea};
+        \node [format, below of = idea,  align = center] (notes) {Piece\\of Paper};
+        \node [format, below of = notes, align = center] (manuscript) {ugly\\.txt file};
+        \node [format, below of = manuscript,  align = center] (paper) {polished\\.pdf file};
+        \node [medium, left of = manuscript, xshift = -3cm] (R)  {R-code};
+        \node [medium, above left  of = manuscript, yshift = 1cm, align = left] (vc) {git};
+        \node [medium, below left of = manuscript,  xshift = -3cm, yshift = -3cm]  (collab) {collaborators};
+        \path [line] (idea) -- node [align=center]{\emph{think,}\\\emph{scribble} }(notes) ;
+        \path [line] (notes) --  node [align=center]{\emph{hack}\\\emph{.md file}}  (manuscript);
+        \path [line] (manuscript) -- node [align=center]{\emph{apply}\\\emph{.tex style}}(paper);     
+       \path [line, below=7cm] (R) --  node [align=center] {\emph{weave}\\\emph{in}}(manuscript);  
+        \path [line, left] (vc) -- node {\emph{track changes}} (manuscript);
+        \path [line] (collab) -- node [align=center, near start] {\emph{give}\\\emph{input}} (manuscript);
+      \end{tikzpicture}
+     \end{minipage}	
+     \\
+    The \emph{diagram} shows the workflow \emph{in theory}. The \emph{right} diagram exemplifies useful tools for each step.
+     
+    \end{block}
+
+
+   
+     \begin{block}{What makes the researcher happy}
+    
+\begin{tabular}{rllll}
+  \hline
+ & Word & Latex & Markdown & WebApps \\ 
+  \hline
+easy &  $\bullet\bullet\bullet$ & $\bullet$ & $\bullet\bullet$ & $\bullet\bullet$ \\ 
+  beautiful & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ &  $\bullet\bullet$ \\ 
+  literal & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet$ \\ 
+  readable & $\bullet$ &  $\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
+  versionized & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
+  citable & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
+  flexible & $\bullet\bullet\bullet$ &  $\bullet\bullet$ & $\bullet$ &  $\bullet\bullet$ \\ 
+   \hline
+   $\Sigma$ & 13 & 17 & 18 & 16\\
+   \hline
+\end{tabular}
+\bigskip
+
+This table compares some (subjective) criteria of what a researcher needs for writing a paper in a reproducible and efficient way. Note: \emph{Word} refers not only to MS Word, but to similar WYSIWYG text processors as well. \emph{WebApps} refer to scholarly writing tools such as \emph{Authorea}. \emph{Markdown} refers to the \emph{pandoc} dialect and extensions of markdown.
+   
+        \end{block}
+
+
+
+  \begin{block}{Software tools for reproducible writing}
+    
+\begin{tabular}{rllll}
+  \hline
+ &  & Name & Description  \\ 
+  \hline
+
+
+
+   \hline
+\end{tabular}
+\bigskip
+
+jljkl\"o   
+        \end{block}
+
+
+
+  
+      
+      \end{column}
+      
+      
+      
+      
+      \begin{column}{.48\linewidth}
+        \begin{block}{Introduction}
+          \begin{itemize}
+          \item some items and $\alpha=\gamma, \sum_{i}$
+          \item some items
+          \item some items
+          \item some items
+          \end{itemize}
+          $$\alpha=\gamma, \sum_{i}$$
+        \end{block}
+
+        \begin{block}{Introduction}
+          \begin{itemize}
+          \item some items
+          \item some items
+          \item some items
+          \item some items
+          \end{itemize}
+        \end{block}
+
+        \begin{block}{Introduction}
+          \begin{itemize}
+          \item some items and $\alpha=\gamma, \sum_{i}$
+          \item some items
+          \item some items
+          \item some items
+          \end{itemize}
+          $$\alpha=\gamma, \sum_{i}$$
+        \end{block}
+      \end{column}
+    \end{columns}
+  \end{frame}
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% End:
