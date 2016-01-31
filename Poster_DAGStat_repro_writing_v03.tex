@@ -6,6 +6,12 @@
   }
   \usepackage{times}
   \usepackage{amsmath,amsthm, amssymb, latexsym, tikz}
+\usepackage{graphicx}
+
+\usepackage{tabulary}
+
+\usepackage[export]{adjustbox}
+
 
 \usepackage{multicol}
 \usetikzlibrary{arrows,shapes}
@@ -103,17 +109,36 @@
     \end{block}
 
 
+
+
+
+        \begin{block}{Requirements to reproducible paper writing}
+        Some (subjective) criteria to tools helping writing scientific papers reproducibly.
+          \begin{itemize}
+          \item \textbf{simple:} The tool should be easy to learn and use (flat learning curve). Life is short.
+          \item \textbf{beautiful:} The tool should set the text in an eye pleasing way, eg., no holes in block aligned text.
+	   \item \textbf{plain:} The tool should work with plain text files, as they will probably readable in (distant) future. In addition, text file are more compatible with other tools, such as version control. 
+         \item \textbf{versionized:} The tool should should support versionizing (tracking changes), including changes from some more or less helpful collaborators.
+         \item \textbf{citable:} The tool should be able to manage (scholarly) citations.
+         \item \textbf{flexible:} The tool should allow for flexible layout, ie., many possibilities for rendering the final, formatted output. This is often in outright contradiction to easyness.
+	
+	
+       \end{itemize}
+        \end{block}
+
+
+
    
-     \begin{block}{What makes the researcher happy}
+     \begin{block}{Which tools make the researcher happy?}
     
 \begin{tabular}{rllll}
   \hline
  & Word & Latex & Markdown & WebApps \\ 
   \hline
-easy &  $\bullet\bullet\bullet$ & $\bullet$ & $\bullet\bullet$ & $\bullet\bullet$ \\ 
+simple &  $\bullet\bullet\bullet$ & $\bullet$ & $\bullet\bullet$ & $\bullet\bullet$ \\ 
   beautiful & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ &  $\bullet\bullet$ \\ 
-  literal & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet$ \\ 
-  readable & $\bullet$ &  $\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
+  plain & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet$ \\ 
+  %readable & $\bullet$ &  $\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
   versionized & $\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
   citable & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ & $\bullet\bullet\bullet$ \\ 
   flexible & $\bullet\bullet\bullet$ &  $\bullet\bullet$ & $\bullet$ &  $\bullet\bullet$ \\ 
@@ -126,64 +151,60 @@ easy &  $\bullet\bullet\bullet$ & $\bullet$ & $\bullet\bullet$ & $\bullet\bullet
 This table compares some (subjective) criteria of what a researcher needs for writing a paper in a reproducible and efficient way. Note: \emph{Word} refers not only to MS Word, but to similar WYSIWYG text processors as well. \emph{WebApps} refer to scholarly writing tools such as \emph{Authorea}. \emph{Markdown} refers to the \emph{pandoc} dialect and extensions of markdown.
    
         \end{block}
-
-
-
+ 
+      
+      \end{column}
+      
+            
+      
+      \begin{column}{.48\linewidth} 
+          
+      
   \begin{block}{Software tools for reproducible writing}
     
-\begin{tabular}{rllll}
+\begin{tabulary}{1.0\textwidth}{CLL}
   \hline
- &  & Name & Description  \\ 
-  \hline
-
-
-
-   \hline
-\end{tabular}
-\bigskip
-
-jljkl\"o   
-        \end{block}
-
-
-
+ Logo  & Name & Description  \\ 
+ \hline
+\includegraphics[valign=T,scale=.3]{logo/R_logo} & \textbf{R }& Environment for statistical calculations and programming\\
+ \includegraphics[valign=T,scale=.1]{logo/RStudio_logo} &  \textbf{R-Studio} & IDE for R including features for version control (eg git), and literal programming (Knitr, Pandoc, Markdown)\\
+ \includegraphics[valign=T, scale=.5]{logo/knitr_logo} &  \textbf{Knitr} & R-package to ``knit'' (or ``weave'') R-code into plain text as a way of functional programming\\
+ \includegraphics[valign=T, scale=.3]{logo/git_logo} & \textbf{Git} & version control tool, handles multiples collaborators, tracks changes in text files\\
+ \texttt{PANDOC} &  \textbf{Pandoc} & ``swiss army knife'' for converting markup languages, eg. Markdown $\rightarrow$ PDF\\
+ %\includegraphics[valign=T, scale=.3]{logo/markdown_logo} & \textbf{Markdown} & Similar aims as Latex, but you learn it in 5 minutes. See: \textbf{boldface} in Markdown\\  
+ \hline
+  \end{tabulary}
   
-      
-      \end{column}
-      
-      
-      
-      
-      \begin{column}{.48\linewidth}
-        \begin{block}{Introduction}
-          \begin{itemize}
-          \item some items and $\alpha=\gamma, \sum_{i}$
-          \item some items
-          \item some items
-          \item some items
-          \end{itemize}
-          $$\alpha=\gamma, \sum_{i}$$
-        \end{block}
+   \end{block}
 
-        \begin{block}{Introduction}
-          \begin{itemize}
-          \item some items
-          \item some items
-          \item some items
-          \item some items
-          \end{itemize}
-        \end{block}
 
-        \begin{block}{Introduction}
+
+        \begin{block}{code bits'n'bites}
+        
+          The main commands are:
           \begin{itemize}
-          \item some items and $\alpha=\gamma, \sum_{i}$
-          \item some items
-          \item some items
-          \item some items
-          \end{itemize}
-          $$\alpha=\gamma, \sum_{i}$$
+             \item Weave code in text using \textbf{knitr}, giving a R-Markdown (.rmd) (or R-Latex, .rnw) file: ``Mean reaction time was \texttt{`round(mean(rt), 2)'} ms''. $\rightarrow$ ``Mean reaction time was 433.30 ms''.
+             \item Knit R-Text-Mixup to pure text plus markup using R-package \textbf{knitr:}
+             \newline \texttt{knitr(source.rmd} 
+             \item Convert Markdown to Latex-PDF with \textbf{Pandoc:} 
+             \newline \texttt{pandoc source.md --output paper.pdf ...} 
+      \end{itemize}
+          
         \end{block}
-      \end{column}
+        
+        
+        
+        \begin{block}{Conclusion}
+            \begin{itemize}
+             \item A somewhat ideal combinations of tools for efficiently and reproducibly writing papers is: R+RStudio+knitr+markdown+pandoc+git.    
+             \item Writing in \texttt{Markdown} is nice, because little markup clutters the view. Pandoc them compiles the markdown to latex, applying some tex-template of your flavor.
+             \item However,  \textt{Pandoc} currently does not provide (easily) provides the flexibility to adjust every detail one may think of, in addition changing the default templates is not yet stable (enough for me). 
+             \item Looking forward to the time where you can write in R-Markdown and compile it to Tex easily with all kinds of style-templates.
+        \end{block}     
+
+   
+   
+         \end{column}
     \end{columns}
   \end{frame}
 \end{document}
