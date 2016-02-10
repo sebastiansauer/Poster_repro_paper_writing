@@ -41,11 +41,11 @@
       \begin{column}{.48\linewidth}
       
         \begin{block}{Reproducibility: What and why?}
-      There is an increasing concern about the reliability of research results \cite{Peng2015}.
-    Precisely, it has been found that many published results cannot be replicated \cite{OpenScienceCollaboration2015}.
+      There is an increasing concern about the reliability of research results \cite{Peng2015}. One reason is that
+    it has been found that many published results cannot be replicated \cite{OpenScienceCollaboration2015}.
     In parts, this can be due to the fact that it is often hardly possible for independent researchers to
-    confirm the results of a research paper. Thus, making research more reproducible seems a pressing need  \cite{Peng2015}.
-    Here, we present some ``recipe'' for making (your) research paper more reproducible using literate programming.
+    confirm (ie., reproduce) the results of a research paper. Thus, making research more reproducible seems a pressing need  \cite{Peng2015}. Note that reproducibility means transparency, and lack of transparency is a serious threat to science.
+    Here, we present a ``recipe'' for making (your) research papers more reproducible using literate programming.
     Literate programming refers to weaving programming code (ie., statistical calculations) with the paper text, ie., the normal text of a paper.    
     
     \end{block}
@@ -113,15 +113,14 @@
 
 
 
-        \begin{block}{Requirements to reproducible paper writing}
-        Some (subjective) criteria to tools helping writing scientific papers reproducibly.
-          \begin{itemize}
-          \item \textbf{simple:} The tool should be easy to learn and use (flat learning curve). Life is short.
-          \item \textbf{beautiful:} The tool should set the text in an eye pleasing way, eg., no holes in block aligned text.
-	   \item \textbf{plain:} The tool should work with plain text files, as they will probably readable in (distant) future. In addition, text file are more compatible with other tools, such as version control. 
-         \item \textbf{versionized:} The tool should should support versionizing (tracking changes), including changes from some more or less helpful collaborators.
-         \item \textbf{citable:} The tool should be able to manage (scholarly) citations.
-         \item \textbf{flexible:} The tool should allow for flexible layout, ie., many possibilities for rendering the final, formatted output. This is often in outright contradiction to easyness.
+        \begin{block}{Criteria to help with writing scientific papers reproducibly}
+         \begin{itemize}
+          \item \textbf{Simple:} The tool should be easy to learn and use (flat learning curve). Life is short.
+          \item \textbf{Aesthetic:} The tool should set the text in an eye pleasing way, eg., no holes in block aligned text.
+	   \item \textbf{Plain:} The tool should work with plain text files, so that they can be readable in future. In addition, text file are more compatible with other tools, such as version control. 
+         \item \textbf{Versionized:} The tool  should support versionizing (tracking changes), including changes from collaborators.
+         \item \textbf{Citable:} The tool should be able to manage (scholarly) citations.
+         \item \textbf{Flexible:} The tool should allow for flexible layout, ie., many possibilities for rendering the final, formatted output. This is often in outright contradiction to simplicity.
 	
 	
        \end{itemize}
@@ -150,7 +149,7 @@ simple &  $\bullet\bullet\bullet$ & $\bullet$ & $\bullet\bullet$ & $\bullet\bull
 \end{center}
 \bigskip
 
-This table compares some (subjective) criteria of what a researcher needs for writing a paper in a reproducible and efficient way. Note: \emph{Word} refers not only to MS Word, but to similar WYSIWYG text processors as well. \emph{WebApps} refer to scholarly writing tools such as \emph{Authorea}. \emph{Markdown} refers to the \emph{Pandoc} dialect (and extensions) of Markdown.
+This table provides (subjective) evaluation of what a researcher needs for writing her paper in a reproducible and efficient way. Note: \emph{Word} refers not only to MS Word, but to similar WYSIWYG text processors as well. \emph{WebApps} refer to scholarly writing tools such as \emph{Authorea}. \emph{Markdown} refers to the \emph{Pandoc} dialect (and extensions) of Markdown.
    
         \end{block}
  
@@ -178,7 +177,7 @@ This table compares some (subjective) criteria of what a researcher needs for wr
            \end{figure}
           \end{minipage}   
           \newline
-          Assume there is not direct link of your (statistical) computations to the respective number in the text.
+          Assume there is not a direct link of your (statistical) computations to the respective number in the text.
           It will be hard to understand for someone unfamiliar with your work which calculations have yielded some figure in your paper. So confirming that the calculations are valid will be hard.  
          \end{block}     
 
@@ -220,11 +219,12 @@ This table compares some (subjective) criteria of what a researcher needs for wr
         
         \begin{block}{Conclusion}
             \begin{itemize}
-            \item Note that complex cognitive steps such as creative thinking, drafting a paper outline, writing an argument, debugging code etc. are best dealt with sequentially. Our brain is not so fit for multitasking \cite{Clapp2011}.
-             \item A somewhat ideal combinations of tools for efficiently and reproducibly writing papers is: R+RStudio+knitr+markdown+pandoc+git.    
-             \item Writing in \texttt{Markdown} is nice, because little markup clutters the view. Pandoc them compiles the markdown to latex, applying some tex-template of your flavor.
-             \item However,  \texttt{Pandoc} currently does not provide (easily) provides the flexibility to adjust every detail one may think of, in addition changing the default templates is not yet stable (enough for me). 
-             \item Looking forward to the time where you can write in R-Markdown and compile it to Tex easily with all kinds of style-templates.
+            \item Note that complex cognitive steps such as creative thinking, drafting a paper outline, writing an argument, debugging code etc. are best dealt with sequentially, as depicted in the workflow. Our brain is not so fit for multitasking \cite{Clapp2011}.
+             \item A great combination of tools for efficient and reproducible writing papers is: R+RStudio+knitr+markdown+pandoc+git.    
+             \item Writing in \texttt{Markdown} is nice, because little markup clutters the view. Pandoc then compiles to latex, applying some Tex-template of your flavor.
+             \item However,  \texttt{Pandoc} is not (yet) flexible enough to adjust every layout detail one may think of. 
+             \item Slides using \texttt{Markdown} or {Latex/Beamer} are no pleasure to the eay.
+             \item Looking forward to the time when it is possible to write in R+Markdown and compile to Tex easily with all kinds of style-templates!
                 \end{itemize}
         \end{block}     
 
